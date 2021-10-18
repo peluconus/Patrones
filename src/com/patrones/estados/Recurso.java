@@ -9,12 +9,17 @@ public class Recurso {
 	public Recurso() {
 	}
 
-	public Recurso(String nombre, Integer valor) {
+	public Recurso(String nombre, Integer valor, Estados estado) {
 		super();
 		this.nombre = nombre;
 		this.valor = valor;
-		this.estado = Estados.OPEN;
+		this.estado = estado;
 	}
+	
+	public Recurso clone() {
+		return new Recurso(this.nombre, this.valor, this.estado);
+	}
+	
 
 	public String getNombre() {
 		return nombre;
@@ -38,6 +43,10 @@ public class Recurso {
 
 	public void setEstado(Estados estado) {
 		this.estado = estado;
+	}
+	
+	public String toString() {
+		return "El "+this.nombre+" con valor "+this.valor+" tiene el estado: "+this.estado;
 	}
 
 }

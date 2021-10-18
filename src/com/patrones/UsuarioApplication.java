@@ -1,5 +1,6 @@
 package com.patrones;
 
+import com.patrones.builders.RecursoBuilder;
 import com.patrones.builders.UsuarioBuilder;
 import com.patrones.estados.Estados;
 import com.patrones.estados.Recurso;
@@ -32,23 +33,25 @@ public class UsuarioApplication {
 		}
 
 		// Práctica Máquina de estados
-		Recurso res = new Recurso("Recurso", null);
-		Recurso res2 = new Recurso("Recurso 2", null);
-		int i ;
+		Recurso res = new RecursoBuilder().build("Recurso", null);
+		Recurso res2 = res.clone();
+		res2.setNombre("Recurso 2");
+		int i;
 		
-		for(i = 0; i<6;) {
-			Integer valor = res.getValor();
-			Integer valor2 = res2.getValor();
-			Estados est = res.getEstado();
-			Estados est2 = res2.getEstado();
-			System.out.println(valor);
-			System.out.println(valor2);
-			System.out.println(est);
-			System.out.println(est2);
+		for(i = 0; i<10;) {
+			if(res.getEstado()==Estados.CLOSED || res2.getEstado()==Estados.CLOSED) {
+				System.out.println(i);
+				System.out.println(res);
+				System.out.println(res2);
+				break;
+			}
+			System.out.println(i);
+			System.out.println(res);
+			System.out.println(res2);
 			if (i == 3) {
 				res.setValor(8);
 			}
-			if (valor == null) {
+			if (res.getValor() == null) {
 				if (res.getEstado() == Estados.OPEN) {
 					res.setEstado(Estados.HALF_OPEN);
 					i++;
@@ -56,10 +59,9 @@ public class UsuarioApplication {
 					i++;
 				}else if (res.getEstado() == Estados.HALF_OPEN && i==5) {
 					res.setEstado(Estados.CLOSED);
-					i = 0;
-					break;
+					i++;
 				}
-			}else if (valor2 == null) {
+			}else if (res2.getValor() == null) {
 				if (res2.getEstado() == Estados.OPEN) {
 					res2.setEstado(Estados.HALF_OPEN);
 					i++;
@@ -67,8 +69,7 @@ public class UsuarioApplication {
 					i++;
 				}else if (res2.getEstado() == Estados.HALF_OPEN && i==5) {
 					res2.setEstado(Estados.CLOSED);
-					i = 0;
-					break;
+					i++;
 				}
 		
 			}
