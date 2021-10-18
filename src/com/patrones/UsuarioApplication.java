@@ -39,17 +39,20 @@ public class UsuarioApplication {
 		int i;
 		
 		for(i = 0; i<10;) {
-			if(res.getEstado()==Estados.CLOSED || res2.getEstado()==Estados.CLOSED) {
-				System.out.println(i);
-				System.out.println(res);
-				System.out.println(res2);
-				break;
-			}
 			System.out.println(i);
 			System.out.println(res);
 			System.out.println(res2);
+			if(res.getEstado()==Estados.CLOSED || res2.getEstado()==Estados.CLOSED) {
+				break;
+			}
 			if (i == 3) {
 				res.setValor(8);
+			}
+			if (res.getValor() != null) {
+				res.setEstado(Estados.OPEN);
+			}
+			if (res2.getValor() != null) {
+				res.setEstado(Estados.OPEN);
 			}
 			if (res.getValor() == null) {
 				if (res.getEstado() == Estados.OPEN) {
