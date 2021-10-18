@@ -33,6 +33,9 @@ public class UsuarioApplication {
 		}
 
 		// Práctica Máquina de estados
+		
+		//Antes de comenzar: El valor esperado es que acabe en la iteración 9 con el estado del
+		//segundo Recurso en CLOSED para que se eleve desde ahí una excepción o lo que haga falta
 
 		// Creamos primer objeto con builder
 		Recurso res = new RecursoBuilder().build("Recurso", null);
@@ -41,8 +44,7 @@ public class UsuarioApplication {
 		Recurso res2 = res.clone();
 		res2.setNombre("Recurso 2");
 
-		// Inicializamos los contadores de cada vez que se actualiza el estado de cada
-		// Recurso
+		// Inicializamos los contadores de cada vez que se actualiza el estado de cada Recurso
 		int contador1 = 0;
 		int contador2 = 0;
 
