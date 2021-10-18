@@ -1,21 +1,18 @@
 package com.patrones.model;
 
-public class Usuario {
-	
+public abstract class Persona {
+
 	private String nombre;
 	private String apellido;
 	private Integer telefono;
-	private Double tarifa;
+	protected Double tarifa;
 
-	public Usuario(String nombre, String apellido, Integer telefono, Double tarifa) {
+	public Persona(String nombre, String apellido, Integer telefono, Double tarifa) {
+		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.telefono = telefono;
 		this.tarifa = tarifa;
-		
-	}
-
-	public Usuario() {
 	}
 
 	public String getNombre() {
@@ -49,10 +46,6 @@ public class Usuario {
 	public void setTarifa(Double tarifa) {
 		this.tarifa = tarifa;
 	}
-	
-	public String toString() {
-		return "Creado usuario con nombre: "+this.nombre+" y apellido: "+this.apellido+", teléfono: "+this.telefono.toString()
-		+" y tarifa: "+this.tarifa.toString();
-	}
+
 
 }
