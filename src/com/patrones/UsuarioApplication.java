@@ -1,6 +1,7 @@
 package com.patrones;
 
 import com.patrones.builders.UsuarioBuilder;
+import com.patrones.model.SingletonUsuario;
 import com.patrones.model.Usuario;
 
 public class UsuarioApplication {
@@ -8,6 +9,13 @@ public class UsuarioApplication {
 	public static void main(String[] args) {
 		Usuario usuario = new UsuarioBuilder().build("Ejemplo", "Ejemplez", 987908712);
 		System.out.println(usuario.toString());
+		
+		new SingletonUsuario();
+		SingletonUsuario singleton = SingletonUsuario.getInstancia("Single", "Ton", 23454321, 3.14);
+		System.out.println(singleton.toString());
+		
+		
+		
 
 	}
 
