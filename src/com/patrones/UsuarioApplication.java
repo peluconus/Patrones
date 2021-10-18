@@ -33,48 +33,75 @@ public class UsuarioApplication {
 		}
 
 		// Práctica Máquina de estados
+
+		// Creamos primer objeto con builder
 		Recurso res = new RecursoBuilder().build("Recurso", null);
+
+		// Clonamos el primer objeto en el segundo y cambiamos el nombre
 		Recurso res2 = res.clone();
 		res2.setNombre("Recurso 2");
-		int i;
-		
-		for(i = 0; i<10;) {
+
+		// Inicializamos los contadores de cada vez que se actualiza el estado de cada
+		// Recurso
+		int contador1 = 0;
+		int contador2 = 0;
+
+		int limite = 5;
+
+		// Comienza el bucle
+		for (int i = 0; i < 15; i++) {
+
+			// Sacamos por pantalla el número de bucles y la info de cada Recurso
 			System.out.println(i);
 			System.out.println(res);
 			System.out.println(res2);
-			if(res.getEstado()==Estados.CLOSED || res2.getEstado()==Estados.CLOSED) {
+
+			// Comprobamos el estado de los recursos: si alguno está Cerrado, acaba el bucle
+			if (res.getEstado() == Estados.CLOSED || res2.getEstado() == Estados.CLOSED) {
 				break;
 			}
+
+			// Cambiamos el valor de uno de los recursos para comprobar que se actualiza el
+			// estado
+			// en caso de que el Recurso al final funcione
 			if (i == 3) {
 				res.setValor(8);
 			}
+
+			// Se comprueba si el valor es correcto ahora en ambos Recursos
 			if (res.getValor() != null) {
 				res.setEstado(Estados.OPEN);
+				contador1 = 0;
 			}
 			if (res2.getValor() != null) {
 				res.setEstado(Estados.OPEN);
 			}
+
+			// Si alguno de los recursos tiene el valor en null, se comienza a actualizar su contador.
+			//Primero se comprueba el primer recurso, y cuando éste sea correcto, se comienza a comprobar
+			//el siguiente, de forma que se hagan las 5 iteraciones después de que el primero ya se haya corregido
 			if (res.getValor() == null) {
 				if (res.getEstado() == Estados.OPEN) {
 					res.setEstado(Estados.HALF_OPEN);
-					i++;
-				}else if (res.getEstado() == Estados.HALF_OPEN && i<5) {
-					i++;
-				}else if (res.getEstado() == Estados.HALF_OPEN && i==5) {
+					contador1++;
+				} else if (res.getEstado() == Estados.HALF_OPEN && contador1 < limite) {
+					contador1++;
+				} else if (res.getEstado() == Estados.HALF_OPEN && contador1 == limite) {
 					res.setEstado(Estados.CLOSED);
-					i++;
+					contador1++;
 				}
-			}else if (res2.getValor() == null) {
+				
+			} else if (res2.getValor() == null) {
 				if (res2.getEstado() == Estados.OPEN) {
 					res2.setEstado(Estados.HALF_OPEN);
-					i++;
-				}else if (res2.getEstado() == Estados.HALF_OPEN && i<5) {
-					i++;
-				}else if (res2.getEstado() == Estados.HALF_OPEN && i==5) {
+					contador2++;
+				} else if (res2.getEstado() == Estados.HALF_OPEN && contador2 < limite) {
+					contador2++;
+				} else if (res2.getEstado() == Estados.HALF_OPEN && contador2 == limite) {
 					res2.setEstado(Estados.CLOSED);
-					i++;
+					contador2++;
 				}
-		
+
 			}
 		}
 
